@@ -13,11 +13,23 @@ public class MainController {
         return "index";
     }
 
-    @GetMapping("/hello")
-    public String hello(Model model)  {
-        model.addAttribute("name", "Bob");
+    @GetMapping("/hello/{helloName}")
+    public String hello(Model model, @PathVariable(value = "helloName") String helloName)  {
+        model.addAttribute("name", helloName);
 
         return "index";
+    }
+
+    @GetMapping("/form")
+    public String showForm() {
+        return "simple-form";
+    }
+
+    @PostMapping("/form")
+    public String saveForm(@RequestParam(value = "name") String name, @RequestParam(value = "email") String email) {
+        System.out.println(name);
+        System.out.println(email);
+        return "redirect:/main/index";
     }
 
     @GetMapping("/getCat")
