@@ -11,4 +11,10 @@ public class MainController {
     public String index() {
         return "index";
     }
+
+    @GetMapping("/getCat")
+    @ResponseBody
+    public Cat showCat() {
+        return new Cat(1L, "Barsik");
+    }
 }
