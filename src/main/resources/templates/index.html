@@ -1,4 +1,7 @@
 <!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
 <html lang="en">
     <head>
         <meta charset="UTF-8">
@@ -6,6 +9,6 @@
     </head>
 
     <body>
-        <h1>Hello, World!</h1>
+        <span th:text="${'Hello, ' + name}"></span>
     </body>
 </html>
