@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Add cat</title>
+    </head>
+
+    <body>
+        <form th:action="@{/main/addCat}" th:object="${cat}" method="post">
+            <span>id</span>
+            <input th:field="*{id}" type="hidden">
+            <p></p>
+
+            <span>name</span>
+            <label>
+                <input th:field="*{name}">
+            </label>
+            <p></p>
+
+            <span>color</span>
+            <label>
+                <input th:field="*{color}">
+            </label>
+            <p></p>
+
+            <button type="submit">Save</button>
+        </form>
+    </body>
+</html>
