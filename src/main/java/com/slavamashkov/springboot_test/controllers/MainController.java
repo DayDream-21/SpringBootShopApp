@@ -1,6 +1,6 @@
 package com.slavamashkov.springboot_test.controllers;
 
-import com.slavamashkov.springboot_test.Cat;
+import com.slavamashkov.springboot_test.entities.Cat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -32,9 +32,17 @@ public class MainController {
         return "redirect:/main/index";
     }
 
-    @GetMapping("/getCat")
-    @ResponseBody
-    public Cat showCat() {
-        return new Cat(1L, "Barsik");
+    @GetMapping("/addCat")
+    public String showAddCatForm(Model model) {
+        Cat cat = new Cat(1L, "Floppa", "Orange");
+        model.addAttribute("cat", cat);
+
+        return "cat-form";
+    }
+
+    @PostMapping("/addCat")
+    public String saveCatForm(@ModelAttribute(value = "cat") Cat cat) {
+        System.out.println(cat);
+        return "redirect:/main/index";
     }
 }
