@@ -16,6 +16,10 @@ public class ProductService {
         this.productRepository = productRepository;
     }
 
+    public Product getByTitle(String title) {
+        return productRepository.findByTitle(title);
+    }
+
     public Product getById(Long id) {
         return productRepository.findById(id);
     }
@@ -26,5 +30,9 @@ public class ProductService {
 
     public void add(Product product) {
         productRepository.save(product);
+    }
+
+    public void delete(Product product) {
+        productRepository.delete(product);
     }
 }
