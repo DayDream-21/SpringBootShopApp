@@ -23,19 +23,33 @@ public class ProductController {
 
         model.addAttribute("products", productService.getAllProducts());
         model.addAttribute("product", product);
-        return "products-form";
+
+        return "products-page";
     }
 
     @PostMapping("/add")
-    public String addProduct(@ModelAttribute(value = "product")Product product) {
+    public String addProduct(@ModelAttribute(value = "product") Product product) {
         productService.add(product);
+
+        return "redirect:/product";
+    }
+
+    @GetMapping("/delete/{id}")
+    public String deleteProduct(Model model, @PathVariable(value = "id") Long id) {
+        Product product = productService.getById(id);
+
+        model.addAttribute("product", product);
+        productService.delete(product);
+
         return "redirect:/product";
     }
 
     @GetMapping("/show/{id}")
     public String showOneProduct(Model model, @PathVariable(value = "id") Long id) {
         Product product = productService.getById(id);
+
         model.addAttribute("product", product);
+
         return "single-product-page";
     }
 }
