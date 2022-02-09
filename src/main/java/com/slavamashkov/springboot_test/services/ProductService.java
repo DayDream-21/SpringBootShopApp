@@ -16,6 +16,10 @@ public class ProductService {
         this.productRepository = productRepository;
     }
 
+    public Product getById(Long id) {
+        return productRepository.findById(id);
+    }
+
     public List<Product> getAllProducts() {
         return productRepository.findAll();
     }
