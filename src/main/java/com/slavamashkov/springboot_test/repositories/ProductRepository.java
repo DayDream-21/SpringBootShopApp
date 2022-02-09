@@ -47,4 +47,8 @@ public class ProductRepository {
     public void save(Product product) {
         products.add(product);
     }
+
+    public void delete(Product product) {
+        products.remove(product);
+    }
  }
