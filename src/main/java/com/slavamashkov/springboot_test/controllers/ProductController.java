@@ -5,10 +5,7 @@ import com.slavamashkov.springboot_test.services.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/product")
@@ -33,5 +30,12 @@ public class ProductController {
     public String addProduct(@ModelAttribute(value = "product")Product product) {
         productService.add(product);
         return "redirect:/product";
+    }
+
+    @GetMapping("/show/{id}")
+    public String showOneProduct(Model model, @PathVariable(value = "id") Long id) {
+        Product product = productService.getById(id);
+        model.addAttribute("product", product);
+        return "single-product-page";
     }
 }
