@@ -15,14 +15,18 @@
                     <th>id</th>
                     <th>name</th>
                     <th>price</th>
+                    <th>action</th>
                 </tr>
             </thead>
 
             <tbody>
-                <tr th:each="p : ${products}">
-                    <td th:text="${p.id}"></td>
-                    <td th:text="${p.title}"></td>
-                    <td th:text="${p.price}"></td>
+                <tr th:each="product : ${products}">
+                    <td th:text="${product.id}"></td>
+                    <td th:text="${product.title}"></td>
+                    <td th:text="${product.price}"></td>
+                    <td>
+                        <a th:href="@{'/product/show/' + ${product.id}}" th:text="Details"></a>
+                    </td>
                 </tr>
             </tbody>
         </table>
@@ -33,19 +37,19 @@
             <div style="margin-bottom: 25px" class="input-group">
                 <span class="input-group-addon"></span>
                 <label>
-                    <input th:field="*{id}" placeholder="4" class="form-control">
+                    <input th:field="${product.id}" placeholder="4" class="form-control">
                 </label>
             </div>
             <div style="margin-bottom: 25px" class="input-group">
                 <span class="input-group-addon"></span>
                 <label>
-                    <input th:field="*{title}" placeholder="Meat" class="form-control">
+                    <input th:field="${product.title}" placeholder="Meat" class="form-control">
                 </label>
             </div>
             <div style="margin-bottom: 25px" class="input-group">
                 <span class="input-group-addon"></span>
                 <label>
-                    <input th:field="*{price}" placeholder="100" class="form-control">
+                    <input th:field="${product.price}" placeholder="100" class="form-control">
                 </label>
             </div>
             <div style="..." class="form-group">
