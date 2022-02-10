@@ -27,7 +27,7 @@
                     <td th:text="${product.title}"></td>
                     <td th:text="${product.price}"></td>
                     <td>
-                        <a th:href="@{'/product/show/' + ${product.id}}" th:text="Update"></a>
+                        <a th:href="@{'/product/updateProduct/' + ${product.id}}" th:text="Update"></a>
                         <a th:href="@{'/product/delete/' + ${product.id}}" th:text="Delete"></a>
                     </td>
                 </tr>
@@ -36,7 +36,7 @@
                     <td>---</td>
                     <td>---</td>
                     <td>
-                        <a th:href="@{'/product/'}" th:text="Add"></a>
+                        <a th:href="@{'/product/addProduct'}" th:text="Add"></a>
                     </td>
                 </tr>
             </tbody>
