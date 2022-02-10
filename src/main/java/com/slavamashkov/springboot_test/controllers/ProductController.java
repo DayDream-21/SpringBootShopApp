@@ -28,8 +28,17 @@ public class ProductController {
     }
 
     @GetMapping("/addProduct")
-    public String showAddProductPage(Model model) {
+    public String addProduct(Model model) {
         Product product = new Product();
+
+        model.addAttribute("product", product);
+
+        return "edit-product-page";
+    }
+
+    @GetMapping("/updateProduct/{id}")
+    public String updateProduct(Model model, @PathVariable(value = "id") Long id) {
+        Product product = productService.getById(id);
 
         model.addAttribute("product", product);
 
@@ -45,8 +54,8 @@ public class ProductController {
         return "redirect:/product";
     }
 
-    @PostMapping("/addProduct")
-    public String saveNewProduct(@ModelAttribute(value = "product") Product product) {
+    @PostMapping("/update")
+    public String saveChanges(@ModelAttribute(value = "product") Product product) {
         productService.add(product);
 
         return "redirect:/product";
