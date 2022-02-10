@@ -27,11 +27,13 @@ public class ProductController {
         return "products-page";
     }
 
-    @PostMapping("/add")
-    public String addProduct(@ModelAttribute(value = "product") Product product) {
-        productService.add(product);
+    @GetMapping("/addProduct")
+    public String showAddProductPage(Model model) {
+        Product product = new Product();
 
-        return "redirect:/product";
+        model.addAttribute("product", product);
+
+        return "add-product-page";
     }
 
     @GetMapping("/delete/{id}")
@@ -44,11 +46,12 @@ public class ProductController {
         return "redirect:/product";
     }
 
-    @GetMapping("/show/{id}")
-    public String showOneProduct(Model model, @PathVariable(value = "id") Long id) {
-        Product product = productService.getById(id);
+    @PostMapping("/addProduct")
+    public String saveNewProduct(@ModelAttribute(value = "product") Product product) {
+        productService.add(product);
 
-        model.addAttribute("product", product);
+        return "redirect:/product";
+    }
 
         return "single-product-page";
     }
