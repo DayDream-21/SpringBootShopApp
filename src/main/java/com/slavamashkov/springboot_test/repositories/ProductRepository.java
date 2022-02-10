@@ -45,7 +45,22 @@ public class ProductRepository {
     }
 
     public void save(Product product) {
-        products.add(product);
+        if (product.getId() == null) {
+            Long newId = products.stream()
+                    .mapToLong(Product::getId)
+                    .max()
+                    .getAsLong() + 1;
+            product.setId(newId);
+            products.add(product);
+        } else {
+            for (Product p : products) {
+                if (p.getId().equals(product.getId())) {
+                    p.setTitle(product.getTitle());
+                    p.setPrice(product.getPrice());
+                    return;
+                }
+            }
+        }
     }
 
     public void delete(Product product) {
