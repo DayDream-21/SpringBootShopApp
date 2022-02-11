@@ -18,11 +18,12 @@ public class ProductController {
     }
 
     @GetMapping
-    public String showProductsList(Model model) {
+    public String showProductsList(Model model, @RequestParam(value = "word", required = false) String word) {
         Product product = new Product();
 
-        model.addAttribute("products", productService.getAllProducts());
+        model.addAttribute("products", productService.getAllProductsWithFilter(word));
         model.addAttribute("product", product);
+        model.addAttribute("word", word);
 
         return "products-page";
     }
