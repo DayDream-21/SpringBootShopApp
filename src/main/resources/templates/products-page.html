@@ -12,6 +12,19 @@
     </head>
 
     <body>
+        <form th:action="@{/product}" method="get" class="form-horizontal">
+            <div style="..." class="input-group">
+                <span class="input-group-addon"></span>
+                <label>
+                    <input th:value="${word != null} ? ${word}" name="word" class="form-control">
+                </label>
+            </div>
+
+            <div style="..." class="form-group">
+                <button type="submit" class="btn btn-primary">Filter</button>
+            </div>
+        </form>
+
         <table class="table table-hover">
             <thead>
                 <tr>
