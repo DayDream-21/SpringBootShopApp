@@ -2,24 +2,35 @@ package com.slavamashkov.springboot_test.entities;
 
 import lombok.*;
 
+import javax.persistence.*;
 import java.util.Objects;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
+@Entity
+@Table(name = "products")
 public class Product {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Long id;
+
+    @NonNull
+    @Column(name = "title")
     private String title;
-    private int price;
+
+    @NonNull
+    @Column(name = "price")
+    private Integer price;
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Product product = (Product) o;
-        return price == product.price && id.equals(product.id) && title.equals(product.title);
+        return Objects.equals(id, product.id) && title.equals(product.title) && price.equals(product.price);
     }
 
     @Override
