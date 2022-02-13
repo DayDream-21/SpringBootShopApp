@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="en">
 <html lang="en">
     <head>
         <meta charset="UTF-8">
@@ -11,19 +12,6 @@
     </head>
 
     <body>
-        <form th:action="@{/product}" method="get" class="form-horizontal">
-            <div style="..." class="input-group">
-                <span class="input-group-addon"></span>
-                <label>
-                    <input th:value="${word != null} ? ${word}" name="word" class="form-control">
-                </label>
-            </div>
-
-            <div style="..." class="form-group">
-                <button type="submit" class="btn btn-primary">Filter</button>
-            </div>
-        </form>
-
         <table class="table table-hover">
             <thead>
                 <tr>
@@ -40,11 +28,16 @@
                     <td th:text="${product.title}"></td>
                     <td th:text="${product.price}"></td>
                     <td>
-                        <a th:href="@{'/product/updateProduct/' + ${product.id}}" th:text="Update"></a>
-                        <a th:href="@{'/product/delete/' + ${product.id}}" th:text="Delete"></a>
+                        <div sec:authorize="hasRole('ADMIN')">
+                            <a th:href="@{'/product/updateProduct/' + ${product.id}}" th:text="Update"></a>
+                            <a th:href="@{'/product/delete/' + ${product.id}}" th:text="Delete"></a>
+                        </div>
+                        <div sec:authorize="hasRole('USER') and !hasRole('ADMIN')">
+                            Add to cart
+                        </div>
                     </td>
                 </tr>
-                <tr>
+                <tr sec:authorize="hasRole('ADMIN')">
                     <td>---</td>
                     <td>---</td>
                     <td>---</td>
