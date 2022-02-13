@@ -21,7 +21,8 @@ public class ProductController {
     public String showProductsList(Model model, @RequestParam(value = "word", required = false) String word) {
         Product product = new Product();
 
-        model.addAttribute("products", productService.getAllProductsWithFilter(word));
+        //model.addAttribute("products", productService.getAllProductsWithFilter(word));
+        model.addAttribute("products", productService.getAllProducts());
         model.addAttribute("product", product);
         model.addAttribute("word", word);
 
@@ -48,9 +49,7 @@ public class ProductController {
 
     @GetMapping("/delete/{id}")
     public String deleteProduct(@PathVariable(value = "id") Long id) {
-        Product product = productService.getById(id);
-
-        productService.delete(product);
+        productService.deleteById(id);
 
         return "redirect:/product";
     }
