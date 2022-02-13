@@ -3,8 +3,6 @@ package com.slavamashkov.springboot_test.controllers;
 import com.slavamashkov.springboot_test.entities.Product;
 import com.slavamashkov.springboot_test.services.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.Banner;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
@@ -25,9 +23,9 @@ public class ProductController {
 
     @GetMapping
     public String showProductsList(Model model, @RequestParam(value = "word", required = false) String word) {
-        //model.addAttribute("products", productService.getAllProductsWithFilter(word));
-        model.addAttribute("products", productService.getAllProducts());
-        //model.addAttribute("word", word);
+        model.addAttribute("products", productService.getProductWithTitleFilter(word));
+        //model.addAttribute("products", productService.getAllProducts());
+        model.addAttribute("word", word);
 
         return "products-page";
     }
