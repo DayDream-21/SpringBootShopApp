@@ -3,9 +3,15 @@ package com.slavamashkov.springboot_test.controllers;
 import com.slavamashkov.springboot_test.entities.Product;
 import com.slavamashkov.springboot_test.services.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.Banner;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Controller
 @RequestMapping("/product")
@@ -19,12 +25,21 @@ public class ProductController {
 
     @GetMapping
     public String showProductsList(Model model, @RequestParam(value = "word", required = false) String word) {
-        Product product = new Product();
-
         //model.addAttribute("products", productService.getAllProductsWithFilter(word));
         model.addAttribute("products", productService.getAllProducts());
-        model.addAttribute("product", product);
-        model.addAttribute("word", word);
+        //model.addAttribute("word", word);
+
+        return "products-page";
+    }
+
+    @GetMapping("/{page}")
+    public String showProductPage(Model model, @PathVariable(value = "page") Integer page) {
+        Pageable pageWithFiveElements = PageRequest.of(page, 5);
+        List<Product> fiveProductsOnPage = productService
+                .getAllProductsPageable(pageWithFiveElements)
+                .getContent();
+
+        model.addAttribute("products", fiveProductsOnPage);
 
         return "products-page";
     }
