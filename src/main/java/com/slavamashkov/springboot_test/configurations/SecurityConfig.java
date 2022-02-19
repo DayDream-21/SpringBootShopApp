@@ -38,8 +38,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/product/**").hasAnyRole("ADMIN")
                     .and()
                 .formLogin()
-                //    .loginPage("/login")
-                //    .loginProcessingUrl("/authenticateTheUser")
+                .loginPage("/product/login")
+                .loginProcessingUrl("/authenticateTheUser")
                 .permitAll();
     }
 
