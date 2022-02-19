@@ -21,6 +21,11 @@ public class ProductController {
         this.productService = productService;
     }
 
+    @GetMapping("/login")
+    public String showLoginPage() {
+        return "custom-login";
+    }
+
     @GetMapping
     public String showProductsList(Model model, @RequestParam(value = "word", required = false) String word) {
         model.addAttribute("products", productService.getProductWithTitleFilter(word));
