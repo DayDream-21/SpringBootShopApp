@@ -16,7 +16,13 @@
             <div style="..." class="input-group">
                 <span class="input-group-addon"></span>
                 <label>
-                    <input th:value="${word != null} ? ${word}" name="word" class="form-control">
+                    <input th:value="${word != null} ? ${word}" name="word" class="form-control" placeholder="Key word">
+                </label>
+                <label>
+                    <input th:value="${min != null} ? ${min}" name="min" class="form-control" placeholder="Minimum price">
+                </label>
+                <label>
+                    <input th:value="${max != null} ? ${max}" name="max" class="form-control" placeholder="Maximum price">
                 </label>
             </div>
 

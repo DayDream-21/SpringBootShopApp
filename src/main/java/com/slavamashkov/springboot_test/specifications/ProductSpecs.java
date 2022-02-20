@@ -9,6 +9,16 @@ public class ProductSpecs {
                 criteriaBuilder.between(root.get("price"), min, max);
     }
 
+    public static Specification<Product> priceGreaterThenOrEqualTo(int value) {
+        return (root, query, criteriaBuilder) ->
+                criteriaBuilder.greaterThanOrEqualTo(root.get("price"), value);
+    }
+
+    public static Specification<Product> priceLessThenOrEqualTo(int value) {
+        return (root, query, criteriaBuilder) ->
+                criteriaBuilder.lessThanOrEqualTo(root.get("price"), value);
+    }
+
     public static Specification<Product> titleContains(String word) {
         return (root, query, criteriaBuilder) ->
                 criteriaBuilder.like(root.get("title"), "%" + word + "%");
