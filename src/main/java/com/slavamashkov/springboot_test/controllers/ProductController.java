@@ -35,6 +35,13 @@ public class ProductController {
         return "products-page";
     }
 
+    @GetMapping("/singleProduct/{id}")
+    public String showSingleProductPage(Model model, @PathVariable(value = "id") Long id) {
+        model.addAttribute("product", productService.getById(id));
+
+        return "single-product-page";
+    }
+
     @GetMapping("/{page}")
     public String showProductPage(Model model, @PathVariable(value = "page") Integer page) {
         Pageable pageWithFiveElements = PageRequest.of(page, 5);
