@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Product</title>
+    </head>
+
+    <body>
+        <form th:action="@{/product}" th:object="${product}" method="get" class="form-horizontal">
+            <span th:text="${product.title}"></span>
+            <span th:text="${product.price}"></span>
+
+            <div style="..." class="form-group">
+                <button type="submit" class="btn btn-primary">Back</button>
+            </div>
+        </form>
+    </body>
+</html>
