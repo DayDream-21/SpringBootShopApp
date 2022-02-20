@@ -51,6 +51,8 @@ public class ProductController {
         model.addAttribute("min", min);
         model.addAttribute("max", max);
 
+        model.addAttribute("top3List", productService.getMostViewedProducts());
+
         return "products-page";
     }
 
