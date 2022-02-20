@@ -4,12 +4,12 @@ import com.slavamashkov.springboot_test.entities.Product;
 import com.slavamashkov.springboot_test.repositories.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class ProductService {
@@ -50,5 +50,14 @@ public class ProductService {
         } else {
             return productRepository.findAll(productSpecification);
         }
+    }
+
+    public void incrementViewsCounter(Product product) {
+        product.setViews(product.getViews() + 1);
+        add(product);
+    }
+
+    public Page<Product> getMostViewedProducts() {
+        return productRepository.getMostViewedProducts(PageRequest.of(0, 3));
     }
 }
