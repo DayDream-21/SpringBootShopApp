@@ -56,7 +56,11 @@ public class ProductController {
 
     @GetMapping("/singleProduct/{id}")
     public String showSingleProductPage(Model model, @PathVariable(value = "id") Long id) {
-        model.addAttribute("product", productService.getById(id));
+        Product product = productService.getById(id);
+
+        productService.incrementViewsCounter(product);
+
+        model.addAttribute("product", product);
 
         return "single-product-page";
     }
