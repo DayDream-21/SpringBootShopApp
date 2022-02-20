@@ -68,5 +68,22 @@
                 </tr>
             </tbody>
         </table>
+
+        <span th:text="'Top3 Products'"></span>
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th>name</th>
+                <th>price</th>
+            </tr>
+            </thead>
+
+            <tbody>
+                <tr th:each="p : ${top3List}">
+                    <td th:text="${p.title}"></td>
+                    <td th:text="${p.price}"></td>
+                </tr>
+            </tbody>
+        </table>
     </body>
 </html>
