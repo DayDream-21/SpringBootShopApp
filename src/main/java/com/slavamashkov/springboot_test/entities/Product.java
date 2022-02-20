@@ -25,6 +25,9 @@ public class Product {
     @Column(name = "price")
     private Integer price;
 
+    @Column(name = "views")
+    private Integer views;
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
