@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<html xmlns:th="http://www.thymeleaf.org"
+      lang="en">
     <head>
         <title>Login Page</title>
         <meta charset="utf-8">
@@ -18,9 +19,7 @@
                 </div>
 
                 <div style="padding-top: 30px" class="panel-body">
-
                     <form th:action="@{/authenticateTheUser}" method="POST" class="form-horizontal">
-
                         <div class="form-group">
                             <div class="col-xs-15">
                                 <div>
@@ -55,11 +54,17 @@
 
                         <div style="margin-top: 10px" class="form-group">
                             <div class="col-sm-6 controls">
-                                <button type="submit" class="btn btn-success">Login</button>
+                                <button type="submit" class="btn btn-success">Sign in</button>
                             </div>
                         </div>
-
                     </form>
+                    <li class="nav-item">
+                        <form class="align-middle" th:action="@{/product/registration}" method="get">
+                            <div class="input-group-prepend">
+                                <button class="btn btn-primary btn-sm" type="submit">Log in</button>
+                            </div>
+                        </form>
+                    </li>
                 </div>
             </div>
         </div>

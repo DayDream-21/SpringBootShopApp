@@ -50,6 +50,14 @@ public class ProductController {
         return "custom-login";
     }
 
+    @GetMapping("/registration")
+    public String showRegistrationPage(Model model) {
+        User emptyUser = new User();
+        model.addAttribute("user", emptyUser);
+
+        return "registration-page";
+    }
+
     @GetMapping
     public String showProductsList(Model model,
                                    @RequestParam(value = "word", required = false) String word,
