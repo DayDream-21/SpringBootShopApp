@@ -1,6 +1,5 @@
 package com.slavamashkov.springboot_test.configurations;
 
-import com.slavamashkov.springboot_test.entities.User;
 import com.slavamashkov.springboot_test.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -33,6 +32,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
+                .antMatchers("/product/registration").permitAll()
+                .antMatchers("/product/registerUser").permitAll()
                 .antMatchers("/product").hasAnyRole("USER")
                 .antMatchers("/product/singleProduct/{id}").hasAnyRole("USER")
                 .antMatchers("/product/{page}").hasAnyRole("USER")
