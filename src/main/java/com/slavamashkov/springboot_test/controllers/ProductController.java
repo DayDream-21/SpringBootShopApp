@@ -58,6 +58,22 @@ public class ProductController {
         return "registration-page";
     }
 
+    @PostMapping("/registerUser")
+    public String registerUser(@ModelAttribute(value = "user") User user) {
+        User newUser = User.builder()
+                .username(user.getUsername())
+                .password(passwordEncoder.encode(user.getPassword()))
+                .name(user.getName())
+                .email(user.getEmail())
+                .enabled(Boolean.TRUE)
+                .roles(roleRepository.findAllById(List.of(1L)))
+                .build();
+
+        userService.saveUser(newUser);
+
+        return "redirect:/product/login";
+    }
+
     @GetMapping
     public String showProductsList(Model model,
                                    @RequestParam(value = "word", required = false) String word,
