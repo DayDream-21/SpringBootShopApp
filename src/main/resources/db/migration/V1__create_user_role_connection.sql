@@ -2,10 +2,10 @@ SHOW search_path;
 
 CREATE TABLE users (
     id serial NOT NULL,
-    username varchar(50) NOT NULL,
-    password varchar(100) NOT NULL,
+    username varchar(50) NOT NULL UNIQUE,
+    password varchar(100) NOT NULL UNIQUE,
     name varchar(100) NOT NULL,
-    email varchar(50) NOT NULL,
+    email varchar(50) NOT NULL UNIQUE,
     enabled boolean NOT NULL,
     PRIMARY KEY (id)
 );
