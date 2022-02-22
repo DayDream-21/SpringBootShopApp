@@ -58,4 +58,7 @@ public class UserServiceImpl implements UserService {
                 .collect(Collectors.toList());
     }
 
+    public void saveUser(User user) {
+        userRepository.save(user);
+    }
 }
