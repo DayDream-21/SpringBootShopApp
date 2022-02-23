@@ -28,15 +28,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/product/registration").permitAll()
-                .antMatchers("/product/registerUser").permitAll()
+                .antMatchers("/authentication/registration").permitAll()
+                .antMatchers("/authentication/registerUser").permitAll()
                 .antMatchers("/product").hasAnyRole("USER")
                 .antMatchers("/product/singleProduct/{id}").hasAnyRole("USER")
                 .antMatchers("/product/{page}").hasAnyRole("USER")
                 .antMatchers("/product/**").hasAnyRole("ADMIN")
                     .and()
                 .formLogin()
-                .loginPage("/product/login")
+                .loginPage("/authentication/login")
                 .loginProcessingUrl("/authenticateTheUser")
                 .defaultSuccessUrl("/product")
                 .permitAll();

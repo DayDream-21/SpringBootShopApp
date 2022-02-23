@@ -22,38 +22,6 @@ import java.util.List;
 @RequestMapping("/product")
 public class ProductController {
     private final ProductService productService;
-    private final UserServiceImpl userService;
-    private final RoleRepository roleRepository;
-    private final PasswordEncoder passwordEncoder;
-
-    @GetMapping("/login")
-    public String showLoginPage() {
-        return "custom-login";
-    }
-
-    @GetMapping("/registration")
-    public String showRegistrationPage(Model model) {
-        User emptyUser = new User();
-        model.addAttribute("user", emptyUser);
-
-        return "registration-page";
-    }
-
-    @PostMapping("/registerUser")
-    public String registerUser(@ModelAttribute(value = "user") User user) {
-        User newUser = User.builder()
-                .username(user.getUsername())
-                .password(passwordEncoder.encode(user.getPassword()))
-                .name(user.getName())
-                .email(user.getEmail())
-                .enabled(Boolean.TRUE)
-                .roles(roleRepository.findAllById(List.of(1L)))
-                .build();
-
-        userService.saveUser(newUser);
-
-        return "redirect:/product/login";
-    }
 
     @GetMapping
     public String showProductsList(Model model,
