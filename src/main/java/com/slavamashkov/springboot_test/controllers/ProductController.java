@@ -6,7 +6,7 @@ import com.slavamashkov.springboot_test.repositories.RoleRepository;
 import com.slavamashkov.springboot_test.services.ProductService;
 import com.slavamashkov.springboot_test.services.UserServiceImpl;
 import com.slavamashkov.springboot_test.specifications.ProductSpecs;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
@@ -18,32 +18,13 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Controller
+@RequiredArgsConstructor
 @RequestMapping("/product")
 public class ProductController {
-    private ProductService productService;
-    private UserServiceImpl userService;
-    private RoleRepository roleRepository;
-    private PasswordEncoder passwordEncoder;
-
-    @Autowired
-    public void setProductService(ProductService productService) {
-        this.productService = productService;
-    }
-
-    @Autowired
-    public void setUserService(UserServiceImpl userService) {
-        this.userService = userService;
-    }
-
-    @Autowired
-    public void setPasswordEncoder(PasswordEncoder passwordEncoder) {
-        this.passwordEncoder = passwordEncoder;
-    }
-
-    @Autowired
-    public void setRoleRepository(RoleRepository roleRepository) {
-        this.roleRepository = roleRepository;
-    }
+    private final ProductService productService;
+    private final UserServiceImpl userService;
+    private final RoleRepository roleRepository;
+    private final PasswordEncoder passwordEncoder;
 
     @GetMapping("/login")
     public String showLoginPage() {

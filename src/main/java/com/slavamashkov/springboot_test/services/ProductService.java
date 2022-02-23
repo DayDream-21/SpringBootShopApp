@@ -2,6 +2,7 @@ package com.slavamashkov.springboot_test.services;
 
 import com.slavamashkov.springboot_test.entities.Product;
 import com.slavamashkov.springboot_test.repositories.ProductRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -11,14 +12,10 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@RequiredArgsConstructor
 @Service
 public class ProductService {
-    private ProductRepository productRepository;
-
-    @Autowired
-    public void setProductRepository(ProductRepository productRepository) {
-        this.productRepository = productRepository;
-    }
+    private final ProductRepository productRepository;
 
     public Page<Product> getAllProductsPageable(Pageable pageable) {
         return productRepository.findAll(pageable);

@@ -4,6 +4,7 @@ import com.slavamashkov.springboot_test.entities.Role;
 import com.slavamashkov.springboot_test.entities.User;
 import com.slavamashkov.springboot_test.repositories.RoleRepository;
 import com.slavamashkov.springboot_test.repositories.UserRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -16,20 +17,10 @@ import java.util.Collection;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+@RequiredArgsConstructor
 @Service
 public class UserServiceImpl implements UserService {
-    UserRepository userRepository;
-    RoleRepository roleRepository;
-
-    @Autowired
-    public void setUserRepository(UserRepository userRepository) {
-        this.userRepository = userRepository;
-    }
-
-    @Autowired
-    public void setRoleRepository(RoleRepository roleRepository) {
-        this.roleRepository = roleRepository;
-    }
+    private final UserRepository userRepository;
 
     @Override
     public User findByUsername(String username) {
