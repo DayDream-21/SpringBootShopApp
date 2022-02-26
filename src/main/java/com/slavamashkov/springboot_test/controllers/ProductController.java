@@ -1,16 +1,12 @@
 package com.slavamashkov.springboot_test.controllers;
 
 import com.slavamashkov.springboot_test.entities.Product;
-import com.slavamashkov.springboot_test.entities.User;
-import com.slavamashkov.springboot_test.repositories.RoleRepository;
 import com.slavamashkov.springboot_test.services.ProductService;
-import com.slavamashkov.springboot_test.services.UserServiceImpl;
 import com.slavamashkov.springboot_test.specifications.ProductSpecs;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
