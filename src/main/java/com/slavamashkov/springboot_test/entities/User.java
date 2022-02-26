@@ -34,7 +34,7 @@ public class User {
     @Column(name = "enabled", nullable = false)
     private Boolean enabled;
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.REMOVE)
     @JoinTable(name = "users_roles",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
