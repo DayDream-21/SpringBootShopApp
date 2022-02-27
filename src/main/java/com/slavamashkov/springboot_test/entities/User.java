@@ -4,6 +4,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
 import java.util.Collection;
 import java.util.Objects;
 
@@ -18,16 +19,20 @@ public class User {
     @Column(name = "id", nullable = false)
     private Long id;
 
+    @NotBlank(message = "Field shouldn't be empty")
     @Column(name = "username", nullable = false, length = 50)
     private String username;
 
+    @NotBlank(message = "Field shouldn't be empty")
     @Column(name = "password", nullable = false, length = 100)
     private String password;
 
+    @NotBlank(message = "Field shouldn't be empty")
     @Column(name = "name", nullable = false, length = 100)
     private String name;
 
-    @Email(message = "Email should be valid: [name]@gmail.com")
+    @Email(message = "Wrong email format")
+    @NotBlank(message = "Field shouldn't be empty")
     @Column(name = "email", nullable = false, length = 50)
     private String email;
 
