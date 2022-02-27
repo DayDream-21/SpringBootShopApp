@@ -1,26 +1,24 @@
 package com.slavamashkov.springboot_test.controllers;
 
 import com.slavamashkov.springboot_test.entities.User;
-import com.slavamashkov.springboot_test.repositories.RoleRepository;
-import com.slavamashkov.springboot_test.services.UserServiceImpl;
+import com.slavamashkov.springboot_test.exceptions.UserAlreadyExistsException;
+import com.slavamashkov.springboot_test.services.UserService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import java.util.List;
+import javax.validation.Valid;
 
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("/authentication")
 public class UserController {
-    private final UserServiceImpl userService;
-    private final RoleRepository roleRepository;
-    private final PasswordEncoder passwordEncoder;
+    private final UserService userService;
 
     @GetMapping("/login")
     public String showLoginPage() {
@@ -36,17 +34,19 @@ public class UserController {
     }
 
     @PostMapping("/registerUser")
-    public String registerUser(@ModelAttribute(value = "user") User user) {
-        User newUser = User.builder()
-                .username(user.getUsername())
-                .password(passwordEncoder.encode(user.getPassword()))
-                .name(user.getName())
-                .email(user.getEmail())
-                .enabled(Boolean.TRUE)
-                .roles(roleRepository.findAllById(List.of(1L)))
-                .build();
+    public String registerUser(Model model,
+                               @ModelAttribute(value = "user") @Valid User user,
+                               BindingResult bindingResult) {
+        try {
+            userService.registerUser(user);
+        } catch (UserAlreadyExistsException exception) {
+            model.addAttribute("error_message", "An account for that username/email already exists.");
+            return "registration-page";
+        }
 
-        userService.saveUser(newUser);
+        if (bindingResult.hasErrors()) {
+            return "registration-page";
+        }
 
         return "redirect:/authentication/login";
     }
