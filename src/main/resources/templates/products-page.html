@@ -12,6 +12,12 @@
     </head>
 
     <body>
+        <form sec:authorize="isAuthenticated()" class="nav-item" th:action="@{/logout}" method="POST">
+            <div style="margin-bottom: 10px" class="input-group-prepend">
+                <h2 th:text="${username}"></h2>
+                <button class="btn btn-primary btn-sm" type="submit">Log out</button>
+            </div>
+        </form>
         <h3>Filter</h3>
         <form th:action="@{/product}" method="get" class="form-horizontal">
             <div style="margin-bottom: 10px" class="input-group">

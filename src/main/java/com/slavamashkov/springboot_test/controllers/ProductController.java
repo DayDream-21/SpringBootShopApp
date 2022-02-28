@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.util.List;
 
 @Controller
@@ -20,7 +21,7 @@ public class ProductController {
     private final ProductService productService;
 
     @GetMapping
-    public String showProductsList(Model model,
+    public String showProductsList(Model model, Principal principal,
                                    @RequestParam(value = "word", required = false) String word,
                                    @RequestParam(value = "min", required = false) Integer min,
                                    @RequestParam(value = "max", required = false) Integer max) {
@@ -37,7 +38,7 @@ public class ProductController {
         }
 
         model.addAttribute("products", productService.getProductWithFilter(specification));
-
+        model.addAttribute("username", principal.getName());
         model.addAttribute("word", word);
         model.addAttribute("min", min);
         model.addAttribute("max", max);
